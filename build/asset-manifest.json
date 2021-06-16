@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.c4757f98.chunk.css",
-    "main.js": "/static/js/main.1b71ab6f.chunk.js",
-    "main.js.map": "/static/js/main.1b71ab6f.chunk.js.map",
+    "main.css": "/static/css/main.bdf762ee.chunk.css",
+    "main.js": "/static/js/main.9b663451.chunk.js",
+    "main.js.map": "/static/js/main.9b663451.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.a45e522d.js",
     "runtime-main.js.map": "/static/js/runtime-main.a45e522d.js.map",
     "static/css/2.2e3114c3.chunk.css": "/static/css/2.2e3114c3.chunk.css",
@@ -12,7 +12,7 @@
     "static/js/3.f741735c.chunk.js.map": "/static/js/3.f741735c.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.2e3114c3.chunk.css.map": "/static/css/2.2e3114c3.chunk.css.map",
-    "static/css/main.c4757f98.chunk.css.map": "/static/css/main.c4757f98.chunk.css.map",
+    "static/css/main.bdf762ee.chunk.css.map": "/static/css/main.bdf762ee.chunk.css.map",
     "static/js/2.c0fce2cb.chunk.js.LICENSE.txt": "/static/js/2.c0fce2cb.chunk.js.LICENSE.txt",
     "static/media/PP_logo_yellow.118c834f.png": "/static/media/PP_logo_yellow.118c834f.png",
     "static/media/font-awesome.min.css": "/static/media/fontawesome-webfont.f691f37e.woff",
@@ -26,7 +26,7 @@
     "static/js/runtime-main.a45e522d.js",
     "static/css/2.2e3114c3.chunk.css",
     "static/js/2.c0fce2cb.chunk.js",
-    "static/css/main.c4757f98.chunk.css",
-    "static/js/main.1b71ab6f.chunk.js"
+    "static/css/main.bdf762ee.chunk.css",
+    "static/js/main.9b663451.chunk.js"
   ]
 }

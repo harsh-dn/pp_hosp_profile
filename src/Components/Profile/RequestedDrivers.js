@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Table } from 'reactstrap';
+import { Profiler } from 'react';
+import "../../css/profile.css";
 
 const RequestedDrivers = () => {
 
@@ -21,8 +23,9 @@ const RequestedDrivers = () => {
     console.log(reqDrivers);
 
     return (
-        <div style={{textAlign:"center"}}>
-            <Table hover bordered responsive>
+        <div className="reqdriver" >
+            <h4 style={{color: "#390999", fontWeight:"800"}}>Drivers Request</h4>
+            <Table hover responsive>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -43,7 +46,7 @@ const RequestedDrivers = () => {
                     <tr >
                         <td>Harsh</td>
                         <td>23451673837</td>
-                        <td><button>Accept</button> <span></span><button>Reject</button></td>
+                        <td><button className="acceptbutton">Accept</button> <span></span><button className="rejectbutton">Reject</button></td>
                     </tr>
                 </tbody>
             </Table>

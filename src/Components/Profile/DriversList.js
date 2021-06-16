@@ -19,8 +19,9 @@ const DriversList = () => {
     }, [])
 
     return (
-        <div style={{textAlign:"center"}}>
-            <Table hover bordered responsive>
+        <div className="driverlist">
+        <h4 style={{color: "#390999" , fontWeight:"800"}}>Drivers Details</h4>
+            <Table hover responsive>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -34,7 +35,7 @@ const DriversList = () => {
                             <tr key={id}>
                                 <td>{driver.name}</td>
                                 <td>{driver.mobileNo}</td>
-                                <td><button>Delete</button></td>
+                                <td><button className="deletebutton">Delete</button></td>
                             </tr>
                         )
                     })}
