@@ -33,7 +33,7 @@
 }
 .driverlist{
     text-align: center;
-    max-height: 60rem;
+    max-height: 600px;
     overflow-y: auto;
     background-color: #feffff;
 }
@@ -43,7 +43,7 @@
 }
 .reqdriver{
     text-align: center;
-    max-height: 30rem;
+    max-height: 600px;
     overflow-y: auto;
     background-color: #ffffff;
 }

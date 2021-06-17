@@ -18,38 +18,60 @@ const RequestedDrivers = () => {
             .catch((err) => {
                 console.log(err);
             })
-    }, [])
+    }, [reqDrivers])
 
-    console.log(reqDrivers);
+    const addDriver = (e) => {
+        axios.put('https://server.prioritypulse.co.in/hosp/acceptDriver', { "driverid": e },
+            {
+                headers: { Authorization: localStorage.getItem("token") }
+            })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    const removeDriver = (e) => {
+        console.log(e)
+        axios.delete('https://server.prioritypulse.co.in/hosp/rejectRequest', { "driverid": e },
+            {
+                headers: { Authorization: localStorage.getItem("token") }
+            })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
 
     return (
-        <div className="reqdriver" >
-            <h4 style={{color: "#390999", fontWeight:"800"}}>Drivers Request</h4>
-            <Table hover responsive>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Mobile</th>
-                        <th>Invitation</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* {reqDrivers.map((driver, id) => {
-                        return (
-                            <tr key={id}>
-                                <td>{driver.name}</td>
-                                <td>{driver.mobileNo}</td>
-                                <td><button>Delete</button><button>Delete</button></td>
-                            </tr>
-                        )
-                    })} */}
-                    <tr >
-                        <td>Harsh</td>
-                        <td>23451673837</td>
-                        <td><button className="acceptbutton">Accept</button> <span></span><button className="rejectbutton">Reject</button></td>
-                    </tr>
-                </tbody>
-            </Table>
+        <div >
+            <h4 style={{ color: "#390999", fontWeight: "800", textAlign: "center" }}>Drivers Request</h4>
+            <div className="reqdriver" >
+                <Table hover responsive>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>Invitation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {reqDrivers.map((driver, id) => {
+                            return (
+                                <tr key={id}>
+                                    <td>{driver.name}</td>
+                                    <td>{driver.mobileNo}</td>
+                                    <td><button className="acceptbutton" onClick={() => addDriver(driver._id)}>Accept</button> <span></span> <button className="rejectbutton" onClick={() => removeDriver(driver._id)}>Reject</button></td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>
+            </div>
         </div>
     )
 }
