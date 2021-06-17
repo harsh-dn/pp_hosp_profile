@@ -35,10 +35,9 @@ const RequestedDrivers = () => {
 
     const removeDriver = (e) => {
         console.log(e)
-        axios.delete('https://server.prioritypulse.co.in/hosp/rejectRequest', { "driverid": e },
-            {
-                headers: { Authorization: localStorage.getItem("token") }
-            })
+        console.log(localStorage.getItem("token"))
+        axios.delete('https://server.prioritypulse.co.in/hosp/rejectRequest',
+            { data: { driverid: e }, headers: { "Authorization": localStorage.getItem("token") } })
             .then((res) => {
                 console.log(res);
             })
