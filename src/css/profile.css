@@ -25,10 +25,29 @@
 }
 .acceptbutton:hover{
     background-color: #00ac72;
-    color: white;	;
+    color: white;
 }
 .rejectbutton:hover{
     background-color: #c80000;
+    color: white;
+}
+.submitbutton{
+    border-radius: 0.5rem ;
+    border: 0;
+    color: #390999;
+    margin: 0.5rem 3rem 0 0;
+}
+.addbutton{
+    border-radius: 0.5rem ;
+    border: 0;
+    color: #390999;
+}
+.addbutton:hover{
+    background-color: #39b1cf;
+    color: white;
+}
+.submitbutton:hover{
+    background-color: #00ac72;
     color: white;
 }
 .driverlist{
@@ -55,9 +74,11 @@
 .profilecoumn{
     border-radius: 1rem;
     background-color:#feffff;;
-    border-top: 0.5px solid grey;
-    border-bottom: 0.5px solid grey;
+    border: 0.5px solid grey;
     padding: 0.5rem 0.5rem;
+}
+.formgroup{
+    margin: 0.2rem 0;
 }
 
 

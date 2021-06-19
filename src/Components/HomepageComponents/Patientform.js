@@ -99,9 +99,9 @@
 //       },
 //     };
 //     axios
-//       .post("https://server.prioritypulse.co.in/hosp/createRide", newUser, {
-//         headers: { Authorization: localStorage.getItem("token") },
-//       })
+    //   .post("https://server.prioritypulse.co.in/hosp/createRide", newUser, {
+    //     headers: { Authorization: localStorage.getItem("token") },
+    //   })
 //       .then(async (res) => {
 //         toast.success("Form Submitted Sucessfully");
 //         await delay(5000);
