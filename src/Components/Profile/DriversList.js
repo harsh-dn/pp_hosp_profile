@@ -18,19 +18,18 @@ const DriversList = () => {
             })
     }, [drivers])
 
-    // const removeDriver = (e) => {
-    //     console.log(e);
-    //     axios.delete('https://server.prioritypulse.co.in/hosp/rejectRequest', { "driverid": e },
-    //         {
-    //             headers: { Authorization: localStorage.getItem("token") }
-    //         })
-    //         .then((res) => {
-    //             console.log(res);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         })
-    // }
+    const removeDriver = (e) => {
+        axios.put('https://server.prioritypulse.co.in/hosp/reverseDriver', { "driverid": e },
+            {
+                headers: { Authorization: localStorage.getItem("token") }
+            })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
 
     return (
         <div >
@@ -50,7 +49,7 @@ const DriversList = () => {
                                 <tr key={id}>
                                     <td>{driver.name}</td>
                                     <td>{driver.mobileNo}</td>
-                                    <td><button className="deletebutton">Delete</button></td>
+                                    <td><button className="deletebutton" onClick={()=>removeDriver(driver._id)}>Delete</button></td>
                                 </tr>
                             )
                         })}

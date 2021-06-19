@@ -33,19 +33,32 @@
 }
 .driverlist{
     text-align: center;
-    max-height: 600px;
+    max-height: 700px;
     overflow-y: auto;
     background-color: #feffff;
 }
+
 .miniaccount{
     text-align: center;
     background-color: #fefefe;
+    align-items: center;
 }
 .reqdriver{
     text-align: center;
-    max-height: 600px;
+    max-height: 700px;
     overflow-y: auto;
     background-color: #ffffff;
 }
+.miniform{
+    padding: 1rem 1rem;
+}
+.profilecoumn{
+    border-radius: 1rem;
+    background-color:#feffff;;
+    border-top: 0.5px solid grey;
+    border-bottom: 0.5px solid grey;
+    padding: 0.5rem 0.5rem;
+}
+
 
 /* #a116ef, #390999 */

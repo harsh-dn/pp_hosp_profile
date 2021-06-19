@@ -14,13 +14,13 @@ const DriverProfile = () => {
             <div className="driverprofile">
                 <Container>
                     <Row style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem" }}>
-                        <Col lg={4}  >
+                        <Col lg={4} className="profilecoumn"  >
                             <RequestedDrivers />
                         </Col>
-                        <Col lg={4}  >
+                        <Col lg={4}  className="profilecoumn">
                             <DriversList />
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={4} className="profilecoumn">
                             <MiniAccounts />
                         </Col>
                     </Row>
