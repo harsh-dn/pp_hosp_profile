@@ -51,6 +51,7 @@ const Login = () => {
       .put("https://server.prioritypulse.co.in/auth/hospisignin", newUser)
 
       .then(async (res) => {
+        //console.log(res)
         localStorage.setItem("token", res["data"]["token"]);
         toast.success("Login Sucessfully");
         await delay(1000);

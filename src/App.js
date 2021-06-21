@@ -9,6 +9,7 @@ import DriverProfile from "../src/Screens/DriverProfile";
 import Login from "../src/Screens/Login";
 import { GuardProvider, GuardedRoute } from "react-router-guards";
 import Signup from "./Screens/Signup"
+
 const requireLogin = (to, from, next) => {
   if (to.meta.auth) {
     if (localStorage.getItem("token") != null) {
@@ -19,6 +20,7 @@ const requireLogin = (to, from, next) => {
     next();
   }
 };
+
 const App = () => {
        
 
