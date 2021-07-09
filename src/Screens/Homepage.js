@@ -24,14 +24,14 @@ const Homepage = (props) => {
   const setaddressCoordinates = (coords) => {
     setguardianCoordinates(coords);
   };
-  console.log(guardianCoordinates);
+  //console.log(guardianCoordinates);
   useEffect(() => {
     axios
       .get("https://server.prioritypulse.co.in/hosp/hospitalActiveDriver", {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         res.data.map((data) => {
           setDriver(res.data);
         });
@@ -46,7 +46,7 @@ const Homepage = (props) => {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setphone(res.data);
       });
   }, []);

@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { Table } from 'reactstrap';
-import { Col, CustomInput, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Grid from '@material-ui/core/Grid';
+
+
 
 
 
@@ -19,12 +33,12 @@ const MiniAccounts = () => {
             .catch((err) => {
                 console.log(err);
             })
-    }, [])
+    }, [accounts])
 
     console.log(accounts);
 
     const [email, setEmail] = useState("");
-    const [userType, setUserType] = useState("Admin");
+    const [userType, setUserType] = useState("mini");
     const [password, setPassword] = useState("");
     const [showHome, setShowHome] = useState(false);
     const [showTrack, setShowTrack] = useState(false);
@@ -66,8 +80,17 @@ const MiniAccounts = () => {
         //     {
         //         headers: { "Authorization": localStorage.getItem("token") }
         //     })
-        axios.delete('https://server.prioritypulse.co.in/hosp/rejectRequest',
-            { data: { accountid: e }, headers: { "Authorization": localStorage.getItem("token") } })
+
+        // axios.delete('https://server.prioritypulse.co.in/hosp/deleteMIni',
+        //     { data: { accountid: e }, headers: { "Authorization": "Bearer " + localStorage.getItem("token") } })
+
+        fetch('https://server.prioritypulse.co.in/hosp/deleteMini', {
+            method: 'DELETE', headers: { 'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem("token") },
+            body: JSON.stringify({
+                accountid: e,
+            })
+        })
+            .then((res) => res.json())
             .then((res) => {
                 console.log(res);
             })
@@ -78,6 +101,7 @@ const MiniAccounts = () => {
 
     const sendData = (e) => {
         console.log(data);
+        SetShowForm(!showForm);
         axios.post('https://server.prioritypulse.co.in/hosp/createMini', data,
             {
                 headers: { "Authorization": localStorage.getItem("token") }
@@ -95,31 +119,31 @@ const MiniAccounts = () => {
             <h4 style={{ color: "#390999", fontWeight: "800", textAlign: "center" }}>Mini Accounts <span style={{ float: "right" }}>
                 <button className="addbutton" onClick={() => SetShowForm(!showForm)}>+</button></span> </h4>
             <div className="driverlist">
-                <Table hover responsive>
-                    <thead>
-                        <tr>
-                            <th>Email</th>
-                            <th>User Type</th>
-                            <th>Change</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {accounts.map((account, id) => {
-                            return (
-                                <tr key={id}>
-                                    <td>{account.email}</td>
-                                    <td>{account.userType}</td>
-                                    <td><button className="editbutton" onClick={() => editAcco(account._id)}>Edit</button>    <span></span>
-                                        <button className="deletebutton" onClick={() => removeAcco(account._id)}>Delete</button></td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </Table>
+                <TableContainer component={Paper}>
+                    <Table size="small" aria-label="a dense table">
+                        <TableHead>
+                            <TableRow  >
+                                <TableCell align="center" >Email</TableCell>
+                                <TableCell align="center">Type</TableCell>
+                                <TableCell align="center">Change</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {accounts.map((account, id) => (
+                                <TableRow key={id}>
+                                    <TableCell align="center">{account.email} </TableCell>
+                                    <TableCell align="center">{account.userType}</TableCell>
+                                    <TableCell align="center"> <button className="editbutton" onClick={() => editAcco(account._id)}>Edit</button>    <span></span>
+                                        <button className="deletebutton" onClick={() => removeAcco(account._id)}>Delete</button></TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </div>
             {showForm ?
                 <div className="miniform">
-                    <Form onSubmit={(e) => e.preventDefault()}  >
+                    {/* <Form onSubmit={(e) => e.preventDefault()}  >
                         <FormGroup className="formgroup" row>
                             <Label sm={3}>Email</Label>
                             <Col sm={9}>
@@ -162,7 +186,129 @@ const MiniAccounts = () => {
                                 <button className="submitbutton" onClick={() => sendData()} >Submit</button>
                             </Col>
                         </FormGroup>
-                    </Form>
+                    </Form> */}
+                    <div>
+                        <div>
+                            <Dialog open={showForm} onClose={() => SetShowForm(!showForm)}>
+                                <DialogTitle >Add An Account</DialogTitle>
+                                <DialogContent >
+                                    <div style={{ textAlign: "center" }}>
+                                        <Grid container spacing={2} >
+                                            <Grid item xs >
+                                                <input style={{}} placeholder="Email..." value={email} onChange={(e) => setEmail(e.target.value)} />
+                                            </Grid>
+                                            <Grid item xs >
+                                                <input style={{}} placeholder="Password..." value={password} onChange={(e) => setPassword(e.target.value)} />
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container spacing={2} >
+                                            <Grid item xs >
+                                                <h6>Choose userType : </h6>
+                                            </Grid>
+                                            <Grid item xs>
+                                                <select value={userType} onChange={(e) => setUserType(e.target.value)} >
+                                                    <option value="mini">Mini</option>
+                                                    <option value="admin">Admin</option>
+                                                </select>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs >
+                                                <h6>Home Page : </h6>
+                                            </Grid>
+                                            <Grid item xs >
+                                                <input type="checkbox"  value={showHome} onChange={(e) => setShowHome(!showHome)}  />
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs >
+                                                <h6>Track Ambulance Page : </h6>
+                                            </Grid>
+                                            <Grid item xs >
+                                                <input type="checkbox"  value={showTrack} onChange={(e) => setShowTrack(!showTrack)}  />
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs >
+                                                <h6>Past Ride Page : </h6>
+                                            </Grid>
+                                            <Grid item xs >
+                                                <input type="checkbox"  value={showPast} onChange={(e) => setShowPast(!showPast)}   />
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs >
+                                                <h6>Profile Page : </h6>
+                                            </Grid>
+                                            <Grid item xs >
+                                                <input type="checkbox"  value={showProfile} onChange={(e) => setShowProfile(!showProfile)}  />
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs >
+                                                <h6>See Drivers List : </h6>
+                                            </Grid>
+                                            <Grid item xs >
+                                                <input type="checkbox"  value={showDriverList} onChange={(e) => setShowDriverList(!showDriverList)}  />
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs >
+                                                <h6>Driver List Action : </h6>
+                                            </Grid>
+                                            <Grid item xs >
+                                                <input type="checkbox"  value={showDriverListAction} onChange={(e) => setShowDriverListAction(!showDriverListAction)}  />
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs >
+                                                <h6>Drivers Requests : </h6>
+                                            </Grid>
+                                            <Grid item xs >
+                                                <input type="checkbox"  value={showRequest} onChange={(e) => setShowRequest(!showRequest)}  />
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs >
+                                                <h6>Drivers request Actions : </h6>
+                                            </Grid>
+                                            <Grid item xs >
+                                                <input type="checkbox"  value={showRequestAction} onChange={(e) => setShowRequestAction(!showRequestAction)}  />
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs >
+                                                <h6>Mini Account : </h6>
+                                            </Grid>
+                                            <Grid item xs >
+                                                <input type="checkbox"  value={showMiniAcco} onChange={(e) => setShowMiniAcco(!showMiniAcco)}  />
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs >
+                                                <h6>Mini Account Actions : </h6>
+                                            </Grid>
+                                            <Grid item xs >
+                                                <input type="checkbox"  value={showMiniAccoActions} onChange={(e) => setShowMiniAccoActions(!showMiniAccoActions)}  />
+                                            </Grid>
+                                        </Grid>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs >
+                                                <h6>Delete Mini : </h6>
+                                            </Grid>
+                                            <Grid item xs >
+                                                <input type="checkbox"  value={showMiniAccoDelete} onChange={(e) => setShowMiniAccoDelete(!showMiniAccoDelete)}  />
+                                            </Grid>
+                                        </Grid>
+                                    </div>
+                                </DialogContent>
+                                <DialogContent align="center">
+                                    <Button color="primary" onClick={() => sendData()} >Submit</Button>
+                                    <Button color="secondary" onClick={() => SetShowForm(!showForm)} >Cancel</Button>
+                                </DialogContent>
+                            </Dialog>
+                        </div>
+                    </div>
                 </div>
                 : null}
         </div>

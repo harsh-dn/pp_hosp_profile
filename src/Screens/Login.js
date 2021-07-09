@@ -29,6 +29,9 @@ const tutorialSteps = [
 ];
 
 const Login = () => {
+
+  //const parts=[code,email,userType,_id,showHome]
+
   const history = useHistory();
   const [user, setUser] = useState({
     email: "",
@@ -51,8 +54,12 @@ const Login = () => {
       .put("https://server.prioritypulse.co.in/auth/hospisignin", newUser)
 
       .then(async (res) => {
-        //console.log(res)
+        console.log(res)
         localStorage.setItem("token", res["data"]["token"]);
+        localStorage.setItem("miniemail", res["data"]["hospital"]["email"]);
+        localStorage.setItem("miniemail", res["data"]["hospital"]["userType"]);
+        //localStorage.setItem("miniemail", res["data"]["hospital"]["email"]);
+        
         toast.success("Login Sucessfully");
         await delay(1000);
         console.log("Login SuccessFully");

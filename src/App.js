@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Route, Switch, Redirect } from "react-router-dom";
 import Footer from "./Components/Footer/Footer.js"
 import Homepage from "../src/Screens/Homepage"
@@ -12,6 +11,7 @@ import Signup from "./Screens/Signup"
 
 const requireLogin = (to, from, next) => {
   if (to.meta.auth) {
+    console.log(localStorage.getItem("miniemail"));
     if (localStorage.getItem("token") != null) {
       next();
     }
@@ -22,7 +22,6 @@ const requireLogin = (to, from, next) => {
 };
 
 const App = () => {
-       
 
   return (
     <>
@@ -44,7 +43,7 @@ const App = () => {
             path="/track"
             exact
             component={Track}
-            meta={{ auth: true }}
+            meta={{ auth: false }}
           />
           <GuardedRoute
             path="/profile"
