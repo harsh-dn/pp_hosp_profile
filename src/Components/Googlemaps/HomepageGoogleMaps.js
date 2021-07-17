@@ -44,7 +44,7 @@ const HomePageSideMap = (props) => {
            Geocode.fromLatLng(pos.lat, pos.lng).then(
              (response) => {
                var address = response.results[0].formatted_address;
-               console.log(address);
+               //console.log(address);
                infoWindow.setContent(address);
 
                // map.panTo(place.geometry.location);

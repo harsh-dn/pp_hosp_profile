@@ -55,7 +55,7 @@ function Navbar({ location }) {
         <nav className={classna}>
           <a  style={{visibility:"hidden" }} href="/home">Home</a>
           <a style={{visibility:"hidden" }}  href="/track">TrackAmbulance</a>
-          <a  style={{visibility:"hidden" }}  href="/pastride">Pastrde</a>
+          <a  style={{visibility:"hidden" }}  href="/pastride">Pastride</a>
           <a href="/login">Login</a>
           <a
              href="/signup"

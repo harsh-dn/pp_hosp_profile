@@ -11,7 +11,6 @@ import Signup from "./Screens/Signup"
 
 const requireLogin = (to, from, next) => {
   if (to.meta.auth) {
-    console.log(localStorage.getItem("miniemail"));
     if (localStorage.getItem("token") != null) {
       next();
     }
@@ -25,6 +24,9 @@ const App = () => {
 
   return (
     <>
+    {console.log(localStorage.getItem("miniShowPast"))}
+    {console.log(localStorage.getItem("miniShowPast"))}
+
       <GuardProvider guards={[requireLogin]}>
         <Switch>
           <GuardedRoute

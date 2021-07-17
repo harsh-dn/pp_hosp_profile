@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { toast } from 'react-toastify';
 
 const DriversList = () => {
 
@@ -18,6 +19,7 @@ const DriversList = () => {
             headers: { Authorization: localStorage.getItem("token") },
         })
             .then((res) => {
+                //console.log(res);
                 setDrivers(res.data);
             })
             .catch((err) => {
@@ -26,16 +28,20 @@ const DriversList = () => {
     }, [drivers])
 
     const removeDriver = (e) => {
-        axios.put('https://server.prioritypulse.co.in/hosp/reverseDriver', { "driverid": e },
-            {
-                headers: { Authorization: localStorage.getItem("token") }
-            })
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+        if (localStorage.getItem("miniShowDriverListAction") == "false") {
+            toast.error("Unauthorized to delete driver");
+        } else {
+            axios.put('https://server.prioritypulse.co.in/hosp/reverseDriver', { "driverid": e },
+                {
+                    headers: { Authorization: localStorage.getItem("token") }
+                })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
     }
 
     return (
@@ -43,7 +49,7 @@ const DriversList = () => {
             <h4 style={{ color: "#390999", fontWeight: "800", textAlign: "center" }}>Drivers Details</h4>
             <div className="driverlist">
                 <TableContainer component={Paper}>
-                    <Table  size="small" aria-label="a dense table">
+                    <Table size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow  >
                                 <TableCell align="center">Name</TableCell>
@@ -52,11 +58,11 @@ const DriversList = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {drivers.map((driver,id) => (
-                                <TableRow  key={id}>
+                            {drivers.map((driver, id) => (
+                                <TableRow key={id}>
                                     <TableCell align="center">{driver.name} </TableCell>
-                                    <TableCell  align="center">{driver.mobileNo}</TableCell>
-                                    <TableCell  align="center"><button className="deletebutton" onClick={()=>removeDriver(driver._id)}>Delete</button></TableCell>
+                                    <TableCell align="center">{driver.mobileNo}</TableCell>
+                                    <TableCell align="center"><button className="deletebutton" onClick={() => removeDriver(driver._id)}>Delete</button></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

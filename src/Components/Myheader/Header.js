@@ -59,10 +59,10 @@ function Navbar({ location }) {
           )}
         </div>
         <nav className={classna}>
-          <a href="/home">Home</a>
-          <a href="/track">TrackAmbulance</a>
-          <a href="/pastride">PastRide</a>
-          <a href="/profile">Profile</a>
+          {localStorage.getItem("miniShowHome") === "true" ?<a href="/home">Home</a>:null}
+          {localStorage.getItem("miniShowTrack") === "true" ? <a href="/track">TrackAmbulance</a>:null}
+          {localStorage.getItem("miniShowPast") === "true" ? <a href="/pastride">PastRide</a> : null}
+          {localStorage.getItem("miniShowProfile") === "true" ?<a href="/profile">Profile</a>:null}
           <a
             onClick={() => {
               localStorage.removeItem("token");

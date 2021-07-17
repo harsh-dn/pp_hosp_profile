@@ -9,21 +9,33 @@ import Grid from '@material-ui/core/Grid';
 
 
 const DriverProfile = () => {
+    var a=0;
+    if(localStorage.getItem("miniShowMiniAcco")==="true"){
+        a++;
+    }
+    console.log(a);
+    if(localStorage.getItem("miniShowDriverList")==="true"){
+        a++;
+    }
+    console.log(a);
+    if(localStorage.getItem("miniShowRequest")==="true"){
+        a++;
+    }
+    console.log(a);
     return (
         <div >
             <Header location="profile" />
             <div className="driverprofile">
                 <Grid container spacing={3}>
-                    <Grid item xs sm={12} md={4} lg={4}  className="profilecoumn"  >
+                    {localStorage.getItem("miniShowRequest")==="true"?<Grid item xs sm={12} md={12/a} lg={12/a}  className="profilecoumn"  >
                         <RequestedDrivers />
-                    </Grid>
-                    <Grid item xs sm={12} md={4} lg={4} className="profilecoumn">
-                        <DriversList />
-                    </Grid>
-                    <Grid item xs sm={12} md={4} lg={4} className="profilecoumn">
-                        <MiniAccounts />
-                    </Grid>
-
+                    </Grid>:null}
+                    {localStorage.getItem("miniShowDriverList")==="true"?<Grid item xs sm={12} md={12/a} lg={12/a} className="profilecoumn">
+                     <DriversList />
+                    </Grid>:null}
+                    {localStorage.getItem("miniShowMiniAcco")==="true"?<Grid item xs sm={12} md={12/a} lg={12/a} className="profilecoumn">
+                         <MiniAccounts />
+                    </Grid>:null}
                 </Grid>
             </div>
         </div>
