@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import "../../css/Header.css"
-import {Link} from "react-router-dom"
+import {NavLink} from "react-router-dom"
 // import { useHistory } from 'react-router'
 import logo from "../../images/PP_logo_yellow.png";
 import MenuIcon from "@material-ui/icons/Menu";
 import ClearIcon from "@material-ui/icons/Clear";
 import { ToastContainer} from "react-toastify";
-import ExitToAppTwoToneIcon from "@material-ui/icons/ExitToAppTwoTone";
 import "react-toastify/dist/ReactToastify.css";
+import Headersignup from "./Headersignup"
 function Navbar({ location }) {
   const [icons, seticons] = useState(false);
   const [classna, setclassna] = useState("slider");
+  if (localStorage.getItem("token") == null) {
+    return (
+      <>
+        <Headersignup location="login" />
+      </>
+    );
+  }
   return (
     <>
       <ToastContainer
@@ -52,54 +59,19 @@ function Navbar({ location }) {
           )}
         </div>
         <nav className={classna}>
-          {localStorage.getItem("token") !== null && localStorage.getItem("miniShowHome") === "true" ? (
-            <a href="/home">Home</a>
-          ) : (
-            <a style={{ visibility: "hidden" }} href="/home">
-              Home
-            </a>
-          )}
-
-          {localStorage.getItem("token") !== null && localStorage.getItem("miniShowTrack") === "true" ? (
-            <a href="/track">TrackAmbulance</a>
-          ) : (
-            <a style={{ visibility: "hidden" }} href="/track">
-              TrackAmbulance
-            </a>
-          )}
-          {localStorage.getItem("token") !== null && localStorage.getItem("miniShowPast") === "true" ? (
-            <a href="/pastride">PastRide</a>
-          ) : (
-            <a style={{ visibility: "hidden" }} href="/pastride">
-              Pastride
-            </a>
-          )}
-
-          {localStorage.getItem("token") !== null && localStorage.getItem("miniShowProfile") === "true" ? (
-            <a href="/profile">Profile</a>
-          ) : (
-            <a href="/login">Login</a>
-          )}
-
-          {localStorage.getItem("token") !== null ? (
-            <a
-              href="/login"
-              onClick={() => {
-                localStorage.removeItem("token");
-              }}
-              style={{ cursor: "pointer", color: "white" }}
-            > 
-                {<ExitToAppTwoToneIcon
-                  id="signout"
-                  value="signout"
-                  fontSize="large"
-                />}
-             
-            </a>
-          ) : (
-            <a href="/signup">Signup</a>
-          )}
-
+          {localStorage.getItem("miniShowHome") === "true" ?<a href="/home">Home</a>:null}
+          {localStorage.getItem("miniShowTrack") === "true" ? <a href="/track">TrackAmbulance</a>:null}
+          {localStorage.getItem("miniShowPast") === "true" ? <a href="/pastride">PastRide</a> : null}
+          {localStorage.getItem("miniShowProfile") === "true" ?<a href="/profile">Profile</a>:null}
+          <a
+            onClick={() => {
+              localStorage.removeItem("token");
+              window.location.reload();
+            }}
+            style={{ cursor: "pointer", color: "white" }}
+          >
+            Logout
+          </a>
           {location === "home" && <div className="animation start-home" />}
           {location === "track" && <div className="animation start-user" />}
           {location === "pastride" && (
@@ -119,3 +91,9 @@ function Navbar({ location }) {
 }
 
 export default Navbar;
+
+/* <div className={location==='home' ? 'odd' : 'even'} onClick={()=>history.push('/')}>Home</div>
+<div className={location==='user' ? 'odd' : 'even'} onClick={()=>history.push('/user')}>User</div>
+<div className={location==='hospital' ? 'odd' : 'even'} onClick={()=>history.push('/hospital')}>Hospital</div>
+<div className={location==='aboutus' ? 'odd' : 'even'} onClick={()=>history.push('/aboutus')}>About Us</div>
+<div className={location==='collab' ? 'odd' : 'even'} onClick={()=>history.push('/collaborate')}>Collaborate</div> */
