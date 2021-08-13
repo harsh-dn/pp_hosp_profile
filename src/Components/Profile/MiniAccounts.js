@@ -33,10 +33,10 @@ const MiniAccounts = () => {
     }, [accounts])
 
     //console.log(accounts);
-
     const [email, setEmail] = useState("");
     const [userType, setUserType] = useState("mini");
     const [password, setPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
     const [showHome, setShowHome] = useState(false);
     const [showTrack, setShowTrack] = useState(false);
     const [showPast, setShowPast] = useState(false);
@@ -51,11 +51,10 @@ const MiniAccounts = () => {
     const [showForm, SetShowForm] = useState(false);
     const [showPutForm, SetShowPutForm] = useState(false);
 
-
     const data = {
         "email": email,
         "userType": userType,
-        "password": password,
+        "password": newPassword,
         "showHome": showHome,
         "showTrack": showTrack,
         "showPast": showPast,
@@ -68,6 +67,7 @@ const MiniAccounts = () => {
         "showMiniAccoActions": showMiniAccoActions,
         "showMiniAccoDelete": showMiniAccoDelete
     }
+
 
     const editAcco = (e) => {
         if (localStorage.getItem("miniShowMiniAccoActions") === "false") {
@@ -137,9 +137,23 @@ const MiniAccounts = () => {
     }
 
     const func = (e)=>{
-        setEmail(e);
         SetShowPutForm(!showPutForm);
+        console.log(e);
+        setEmail(e.email);
+        setUserType(e.userType);
+        setShowHome(e.showHome);
+        setShowTrack(e.showTrack);
+        setShowPast(e.showPast);
+        setShowProfile(e.showProfile);
+        setShowDriverList(e.showDriverList);
+        setShowDriverListAction(e.showDriverListAction);
+        setShowRequest(e.showRequest);
+        setShowRequestAction(e.showRequestAction);
+        setShowMiniAcco(e.showMiniAcco);
+        setShowMiniAccoActions(e.showMiniAccoActions);
+        setShowMiniAccoDelete(e.showMiniAccoDelete);
     }
+
 
     return (
         <div className="miniaccount" >
@@ -160,7 +174,7 @@ const MiniAccounts = () => {
                                 <TableRow key={id}>
                                     <TableCell align="center">{account.email} </TableCell>
                                     <TableCell align="center">{account.userType}</TableCell>
-                                    <TableCell align="center"> <button className="editbutton" onClick={() =>{localStorage.getItem("miniShowMiniAccoActions")==="true"? func(account.email):toast.error("Unauthorized to edit account")}}>Edit</button>    <span></span>
+                                    <TableCell align="center"> <button className="editbutton" onClick={() =>{localStorage.getItem("miniShowMiniAccoActions")==="true"? func(account):toast.error("Unauthorized to edit account")}}>Edit</button>    <span></span>
                                         <button className="deletebutton" onClick={() => removeAcco(account._id)}>Delete</button></TableCell>
                                 </TableRow>
                             ))}
@@ -307,7 +321,7 @@ const MiniAccounts = () => {
                                             <input style={{}} placeholder="Email..." value={email} onChange={(e) => setEmail(e.target.value)} />
                                         </Grid>
                                         <Grid item xs >
-                                            <input style={{}} placeholder="New Password..." value={password} onChange={(e) => setPassword(e.target.value)} />
+                                            <input style={{}} placeholder="New Password..." value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                                         </Grid>
                                     </Grid>
                                     <Grid container spacing={2} >
@@ -328,7 +342,7 @@ const MiniAccounts = () => {
                                                     <h6>Home Page : </h6>
                                                 </Grid>
                                                 <Grid item xs >
-                                                    <input type="checkbox" value={showHome} onChange={(e) => setShowHome(!showHome)} />
+                                                    <input type="checkbox" checked={showHome} onChange={(e) => setShowHome(!showHome)} />
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
@@ -336,7 +350,7 @@ const MiniAccounts = () => {
                                                     <h6>Track Ambulance Page : </h6>
                                                 </Grid>
                                                 <Grid item xs >
-                                                    <input type="checkbox" value={showTrack} onChange={(e) => setShowTrack(!showTrack)} />
+                                                    <input type="checkbox" checked={showTrack} onChange={(e) => setShowTrack(!showTrack)} />
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
@@ -344,7 +358,7 @@ const MiniAccounts = () => {
                                                     <h6>Past Ride Page : </h6>
                                                 </Grid>
                                                 <Grid item xs >
-                                                    <input type="checkbox" value={showPast} onChange={(e) => setShowPast(!showPast)} />
+                                                    <input type="checkbox" checked={showPast} onChange={(e) => setShowPast(!showPast)} />
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
@@ -352,7 +366,7 @@ const MiniAccounts = () => {
                                                     <h6>Profile Page : </h6>
                                                 </Grid>
                                                 <Grid item xs >
-                                                    <input type="checkbox" value={showProfile} onChange={(e) => setShowProfile(!showProfile)} />
+                                                    <input type="checkbox" checked={showProfile} onChange={(e) => setShowProfile(!showProfile)} />
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
@@ -360,7 +374,7 @@ const MiniAccounts = () => {
                                                     <h6>See Drivers List : </h6>
                                                 </Grid>
                                                 <Grid item xs >
-                                                    <input type="checkbox" value={showDriverList} onChange={(e) => setShowDriverList(!showDriverList)} />
+                                                    <input type="checkbox" checked={showDriverList} onChange={(e) => setShowDriverList(!showDriverList)} />
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
@@ -368,7 +382,7 @@ const MiniAccounts = () => {
                                                     <h6>Driver List Action : </h6>
                                                 </Grid>
                                                 <Grid item xs >
-                                                    <input type="checkbox" value={showDriverListAction} onChange={(e) => setShowDriverListAction(!showDriverListAction)} />
+                                                    <input type="checkbox" checked={showDriverListAction} onChange={(e) => setShowDriverListAction(!showDriverListAction)} />
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
@@ -376,7 +390,7 @@ const MiniAccounts = () => {
                                                     <h6>Drivers Requests : </h6>
                                                 </Grid>
                                                 <Grid item xs >
-                                                    <input type="checkbox" value={showRequest} onChange={(e) => setShowRequest(!showRequest)} />
+                                                    <input type="checkbox" checked={showRequest} onChange={(e) => setShowRequest(!showRequest)} />
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
@@ -384,7 +398,7 @@ const MiniAccounts = () => {
                                                     <h6>Driver Request Action : </h6>
                                                 </Grid>
                                                 <Grid item xs >
-                                                    <input type="checkbox" value={showRequestAction} onChange={(e) => setShowRequestAction(!showRequestAction)} />
+                                                    <input type="checkbox" checked={showRequestAction} onChange={(e) => setShowRequestAction(!showRequestAction)} />
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
@@ -392,7 +406,7 @@ const MiniAccounts = () => {
                                                     <h6>Mini Account : </h6>
                                                 </Grid>
                                                 <Grid item xs >
-                                                    <input type="checkbox" value={showMiniAcco} onChange={(e) => setShowMiniAcco(!showMiniAcco)} />
+                                                    <input type="checkbox" checked={showMiniAcco} onChange={(e) => setShowMiniAcco(!showMiniAcco)} />
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
@@ -400,7 +414,7 @@ const MiniAccounts = () => {
                                                     <h6>Mini Account Actions : </h6>
                                                 </Grid>
                                                 <Grid item xs >
-                                                    <input type="checkbox" value={showMiniAccoActions} onChange={(e) => setShowMiniAccoActions(!showMiniAccoActions)} />
+                                                    <input type="checkbox" checked={showMiniAccoActions} onChange={(e) => setShowMiniAccoActions(!showMiniAccoActions)} />
                                                 </Grid>
                                             </Grid>
                                             <Grid container spacing={2}>
@@ -408,7 +422,7 @@ const MiniAccounts = () => {
                                                     <h6>Delete Mini : </h6>
                                                 </Grid>
                                                 <Grid item xs >
-                                                    <input type="checkbox" value={showMiniAccoDelete} onChange={(e) => setShowMiniAccoDelete(!showMiniAccoDelete)} />
+                                                    <input type="checkbox" checked={showMiniAccoDelete} onChange={(e) => setShowMiniAccoDelete(!showMiniAccoDelete)} />
                                                 </Grid>
                                             </Grid>
                                         </div> : null}

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "../../css/Header.css"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 // import { useHistory } from 'react-router'
 import logo from "../../images/PP_logo_yellow.png";
 import MenuIcon from "@material-ui/icons/Menu";
 import ClearIcon from "@material-ui/icons/Clear";
-import { ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import ExitToAppTwoToneIcon from "@material-ui/icons/ExitToAppTwoTone";
 import "react-toastify/dist/ReactToastify.css";
+
 function Navbar({ location }) {
   const [icons, seticons] = useState(false);
   const [classna, setclassna] = useState("slider");
@@ -52,21 +53,19 @@ function Navbar({ location }) {
           )}
         </div>
         <nav className={classna}>
-          {localStorage.getItem("token") !== null && localStorage.getItem("miniShowHome") === "true" ? (
-            <a href="/home">Home</a>
-          ) : (
+          {localStorage.getItem("token") !== null && localStorage.getItem("miniShowHome") === "true" ? 
+            <a href="/home">Home</a>:
             <a style={{ visibility: "hidden" }} href="/home">
               Home
             </a>
-          )}
+          }
 
-          {localStorage.getItem("token") !== null && localStorage.getItem("miniShowTrack") === "true" ? (
-            <a href="/track">TrackAmbulance</a>
-          ) : (
-            <a style={{ visibility: "hidden" }} href="/track">
-              TrackAmbulance
-            </a>
-          )}
+          {localStorage.getItem("token") !== null && localStorage.getItem("miniShowTrack") === "true" ?
+            <a href="/track">TrackAmbulance</a> :
+            /* <a style={{ visibility: "hidden" }} href="/track">TrackAmbulance</a> */
+            null
+          }
+
           {localStorage.getItem("token") !== null && localStorage.getItem("miniShowPast") === "true" ? (
             <a href="/pastride">PastRide</a>
           ) : (
@@ -88,13 +87,12 @@ function Navbar({ location }) {
                 localStorage.removeItem("token");
               }}
               style={{ cursor: "pointer", color: "white" }}
-            > 
-                {<ExitToAppTwoToneIcon
-                  id="signout"
-                  value="signout"
-                  fontSize="large"
-                />}
-             
+            >
+              {<ExitToAppTwoToneIcon
+                id="signout"
+                value="signout"
+                fontSize="large"
+              />}
             </a>
           ) : (
             <a href="/signup">Signup</a>

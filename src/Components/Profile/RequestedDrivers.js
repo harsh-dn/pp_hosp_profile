@@ -79,7 +79,7 @@ const RequestedDrivers = () => {
                         <TableBody>
                             {reqDrivers.map((driver, id) => (
                                 <TableRow key={id}>
-                                    <TableCell align="center">{driver.name} </TableCell>
+                                    <TableCell align="center"><img src={driver.driverL}  className="responsive" /> {driver.name} </TableCell>
                                     <TableCell align="center">{driver.mobileNo}</TableCell>
                                     <TableCell align="center"><button className="acceptbutton" onClick={() => addDriver(driver._id)}>Accept</button> <span></span> <button className="rejectbutton" onClick={() => removeDriver(driver._id)}>Reject</button></TableCell>
                                 </TableRow>
